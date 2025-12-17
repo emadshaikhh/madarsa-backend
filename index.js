@@ -1,18 +1,20 @@
+require('dotenv').config(); // Load environment variables if .env file exists
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const app = express();
-const PORT = 3000;
+// 👇 CHANGE 1: Let Render choose the port, or use 3000 locally
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
 // --- CONNECT TO MONGODB ---
-// (Make sure your password and link are correct here)
-const mongoURI = 'mongodb+srv://Emad:sihipur123@madrasa-sihipur.y40rdp3.mongodb.net/?appName=Madrasa-Sihipur'; 
+// 👇 CHANGE 2: Look for the Secret Key first. If not found, use the hardcoded link.
+const mongoURI = process.env.MONGO_URL || 'mongodb+srv://Emad:sihipur123@madrasa-sihipur.y40rdp3.mongodb.net/?appName=Madrasa-Sihipur'; 
 
 mongoose.connect(mongoURI)
   .then(() => console.log('✅ Connected to MongoDB Atlas!'))
