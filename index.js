@@ -4,9 +4,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const app = express();
-// 👇 CHANGE 1: Let Render choose the port, or use 3000 locally
-const PORT = process.env.PORT || 3000;
+app.use(cors({
+  origin: ['http://localhost:4200', 'https://madrasa-islamia.netlify.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Middleware
 app.use(cors());
